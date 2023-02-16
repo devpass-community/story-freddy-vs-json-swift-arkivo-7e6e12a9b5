@@ -7,7 +7,7 @@ struct Service {
     init(network: NetworkProtocol = Network()) {
         self.network = network
     }
-
+    
     func fetchList(of user: String, completion: @escaping ([Repository]?) -> Void) {
         
         // TODO
@@ -15,12 +15,11 @@ struct Service {
         network.performGet(url: url, completion: {(data) in
             
             let users = try! JSONDecoder().decode([Repository].self, from: data!)
-            print(users)
             
             DispatchQueue.main.async {
                 completion(users)
             }
             
         })
-                           }
+    }
 }
